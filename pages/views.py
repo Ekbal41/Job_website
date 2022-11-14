@@ -1,9 +1,18 @@
-from django.views.generic import TemplateView
+from django.shortcuts import render
+from .models import Job
 
 
-class HomePageView(TemplateView):
-    template_name = "pages/home.html"
+def index(request):
+    jobs = Job.objects.order_by('-date')[:6]
+    
+    return render(request,'tutor/index.html',{'jobs': jobs})
 
+def joblist(request):
+    
+    return render(request,'tutor/joblist.html')
 
-class AboutPageView(TemplateView):
-    template_name = "pages/about.html"
+def job(request, pk):
+    job = Job.objects.get(id =pk)
+    
+    return render(request,'tutor/job.html',{'job': job})
+

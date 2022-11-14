@@ -1,10 +1,13 @@
 from django.urls import path
 
-from .views import HomePageView, AboutPageView
+from . import views
 
 urlpatterns = [
-    path("", HomePageView.as_view(), name="home"),
-    path("about/", AboutPageView.as_view(), name="about"),
+    path("", views.index, name="home"),
+    path("joblist", views.joblist, name="joblist"),
+    path("job/<int:pk>", views.job, name="job"),
+    
+    
     
     
 ]
