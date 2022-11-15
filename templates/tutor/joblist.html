@@ -39,28 +39,57 @@
                 </ul>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
+
+                        {% for job in page_obj %}
+                        
                         
                         <div class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                    <img class="flex-shrink-0 img-fluid border rounded" src="img/com-logo-2.jpg" alt="" style="width: 80px; height: 80px;">
+                                  
+                                    {% if job.gender == "Male"%}
+                                    <img class="flex-shrink-0 img-fluid border rounded" src="{% static 'male.png' %}" alt="" style="width: 80px; height: 80px;">
+                                    {%else%}
+                                    <img class="flex-shrink-0 img-fluid border rounded" src="{% static 'female.png' %}" alt="" style="width: 80px; height: 80px;">
+                                    {%endif%}
                                     <div class="text-start ps-4">
-                                        <h5 class="mb-3">Marketing Manager</h5>
-                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+                                        <h5 class="mb-3">{{job.title}}
+                                            {% if job.status == "Available"%}
+                                            <span class="badge badge-success">{{job.status}}</span></h3>
+                                            {% elif job.status == "NotAvailable"%}
+                                            <span class="badge badge-danger">{{job.status}}</span></h3>
+                
+                                            {%else%}
+                                            <span class="badge badge-warning">{{job.status}}</span>
+                                            <span class="badge badge-success">Can Apply</span>
+                                            {%endif%}
+                                        </h5>
+                                        <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{job.location}}</span>
+                                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>Class: {{job.sclass}}</span>
+                                        <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>Salary: {{job.salary}}</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3">
                                         <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
-                                        <a class="btn btn-primary" href="">Apply Now</a>
+                                        <a class="btn btn-primary" href="/job/{{job.id}}">Apply Now</a>
                                     </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan, 2045</small>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{job.date}}</small>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                    {%endfor%}
+                    <nav class="blog-nav nav nav-justified my-5">
+                        {% if page_obj.has_previous %}
+                       
+                        <a class="btn btn-secondary btn-lg" href="?page={{ page_obj.previous_page_number }}">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                        {% endif %}
+                        <!--  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
+                        {% if page_obj.has_next %}
+                        <a class="btn btn-secondary btn-lg" href="?page={{ page_obj.next_page_number }}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+                        {% endif %}
+                    </nav>
+    
                     </div>
                 </div>
             </div>

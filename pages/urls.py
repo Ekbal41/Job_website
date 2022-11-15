@@ -6,6 +6,7 @@ urlpatterns = [
     path("", views.index, name="home"),
     path("joblist", views.joblist, name="joblist"),
     path("job/<int:pk>", views.job, name="job"),
+    path("aplications/<int:pk>", views.aplications, name="aplications"),
     
     
     

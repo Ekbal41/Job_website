@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from .models import Job
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import redirect
+from .models import Job, Teacher, Aplications
+
 
 
 def index(request):
@@ -8,11 +11,77 @@ def index(request):
     return render(request,'tutor/index.html',{'jobs': jobs})
 
 def joblist(request):
+    jobs = Job.objects.order_by('-date')
+    page_num = request.GET.get('page', 1)
+
+    paginator = Paginator(jobs, 1) # 6 employees per page
+
+
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+
     
-    return render(request,'tutor/joblist.html')
+    return render(request,'tutor/joblist.html',{'jobs': jobs,'page_obj': page_obj })
 
 def job(request, pk):
     job = Job.objects.get(id =pk)
     
-    return render(request,'tutor/job.html',{'job': job})
+    return render(request,'tutor/job.html',{'job': job},)
+
+def aplications(request, pk):
+    if request.method=='POST':
+        
+       
+        
+        job = Job.objects.get(id =pk)
+        if job.status == "NotAvailable":
+            pass
+        else:
+            job.status ='Pending'
+            job.save()
+        
+        
+        tphone = request.POST.get('phone')
+        oldteacher = Teacher.objects.filter(phone=tphone).exists()
+        
+        if oldteacher:
+            pass
+        else:
+            
+            tfirstname = request.POST.get('firstname')
+            tlastname = request.POST.get('lastname')
+            name = str(tfirstname)+str(tlastname)
+        
+            tcov = request.POST.get('cover')
+            tuniversity= request.POST.get('uni')
+            tphone = request.POST.get('phone')
+            teacher=Teacher(name=name,cv=tcov,university=tuniversity,phone=tphone)
+            teacher.save()
+        
+        if job.status == "NotAvailable":
+            pass
+        else:
+            job.status ='Pending'
+            job.save()
+            tfirstname = request.POST.get('firstname')
+            tlastname = request.POST.get('lastname')
+            name = str(tfirstname)+str(tlastname)
+        
+            tcov = request.POST.get('cover')
+            tuniversity= request.POST.get('uni')
+            tphone = request.POST.get('phone')
+            aplication=Aplications(name=name,cv=tcov,university=tuniversity,phone=tphone)
+            aplication.save()      
+    
+    
+        return redirect("/")
+    
+    
+
 

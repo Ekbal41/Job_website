@@ -49,9 +49,36 @@ class Job(models.Model):
     teacherback=models.CharField(max_length=50,choices = CHOICES)
     teachergender=models.CharField(max_length=50,choices = GEN)
     salary=models.PositiveIntegerField(default=3000)
-    date=models.DateField(auto_now=True)
+    date=models.DateTimeField(auto_now=True)
     status=models.CharField(max_length=20,default="Available",choices = STA)
       
 
     def __str__(self):
         return self.title
+
+
+class Teacher(models.Model):
+    name=models.CharField(max_length=50,null=True)
+    university=models.CharField(max_length=50,null=True)
+    phone=models.CharField(max_length=50,null=True)
+    cv = RichTextField()
+    
+    
+    
+    def __str__(self):
+     if self.name==None:
+         return "TEACHER NAME IS NULL"
+     return self.name
+    
+    
+class Aplications(models.Model):
+        
+    name=models.CharField(max_length=50)
+    university=models.CharField(max_length=50)
+    phone=models.CharField(max_length=50)
+    cv = RichTextField()
+    
+    
+    
+    def __str__(self):
+        return self.name
