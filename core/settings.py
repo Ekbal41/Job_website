@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     # Local apps
     "accounts",
     "pages",
-    "ckeditor"
+    "ckeditor",
+    "tutoruser"
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
