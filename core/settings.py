@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "debug_toolbar",
+    'django_filters',
     # Local apps
     "accounts",
     "pages",
@@ -185,7 +186,9 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 #You can remove Dj toolbar by making True to False
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda r: True,
+    'SHOW_TOOLBAR_CALLBACK': lambda r: False,
 }
 
 CSRF_TRUSTED_ORIGINS=['http://http://127.0.0.1:8000/']
+
+FILTERS_EMPTY_CHOICE_LABEL = 'Nothing Selected'

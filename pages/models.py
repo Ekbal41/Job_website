@@ -1,4 +1,5 @@
 from django.db import models
+import django_filters
 from ckeditor.fields import RichTextField
 
 # Create your models here.
@@ -82,3 +83,36 @@ class Aplications(models.Model):
     
     def __str__(self):
         return self.name
+    
+    
+    
+class JobFilter(django_filters.FilterSet):
+    STATUS_CHOICES = (
+    ('Available', 'Available'),
+    ('NotAvailable', 'NotAvailable'),
+    ('Pending', 'Pending'),
+)
+    
+    GENDER_CHOICES = (
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+    ('Other', 'Other'),
+    
+)
+    
+    V_CHOICES = (
+    ('English V', 'English Version'),
+    ('Bangla V', 'Bangla Version'),
+    ('Arabic V', 'Arabic Version'),
+    
+)
+    title = django_filters.CharFilter(lookup_expr='icontains',label='Word in Title')
+    status = django_filters.ChoiceFilter(lookup_expr='iexact',choices=STATUS_CHOICES, label='Tuition status')
+    gender = django_filters.ChoiceFilter(lookup_expr='iexact',choices=GENDER_CHOICES, label='Student Gender')
+    Vtype = django_filters.ChoiceFilter(lookup_expr='iexact',choices=V_CHOICES, label='Version')
+    sclass = django_filters.CharFilter(lookup_expr='icontains', label='Class')
+   
+
+class Meta:
+    model = Job
+    fields = ['title','status','gender','Vtype' 'sclass' 'date']

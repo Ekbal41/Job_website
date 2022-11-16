@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect
-from .models import Job, Teacher, Aplications
+from .models import Job, Teacher, Aplications,JobFilter
 
 
 
@@ -143,6 +143,11 @@ def aplications(request, pk):
     
     
         return redirect("/")
+    
+    
+def job_list(request):
+    f = JobFilter(request.GET, queryset=Job.objects.all())
+    return render(request, 'tutor/search.html', {'filter': f})
     
     
 
