@@ -9,3 +9,20 @@ p .link-info{
 
 }
 
+
+
+  
+
+#id_title, #id_gender,#id_Vtype,#id_sclass, #id_status{
+    width: 100%;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-style: solid;
+  
+    border-radius: 4px;
+    cursor: pointer;
+    border-color:#6C55F9;
+
+}

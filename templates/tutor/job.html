@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load humanize %}
 {%load static%}
 
 {%block content%}
@@ -117,7 +117,7 @@
             <div class="col-lg-4">
                 <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                     <h4 class="mb-4">Student Info</h4>
-                    <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:{{job.date}}</p>
+                    <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{job.date|naturaltime}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Class: {{job.sclass}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Version: {{job.Vtype}}</p>
                     <p><i class="fa fa-angle-right text-primary me-2"></i>Section: {{job.section}}</p>

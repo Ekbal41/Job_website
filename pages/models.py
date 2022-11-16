@@ -84,7 +84,7 @@ class Aplications(models.Model):
     def __str__(self):
         return self.name
     
-    
+
     
 class JobFilter(django_filters.FilterSet):
     STATUS_CHOICES = (

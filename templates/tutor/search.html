@@ -1,11 +1,62 @@
 {% extends "_base.html" %}
+{% load humanize %}
 {% load static%}
+
 {% load crispy_forms_tags %}
 
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+   
 
 
-        <!-- Search Start -->
+
+ <center>
+    
+<img src="{% static 'search.png' %}" alt="Girl in a jacket" width="200" height="200"><div class="input-group-btn">
+    <div class="btn-group" role="group">
+        <div class="dropdown dropdown-lg">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span>Click Here To Search</button>
+            <div class="dropdown-menu dropdown-menu-right" style="width: 500px; margin-top:150px; margin-left:350px; padding: 30px;"role="menu">
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; color:#6C55F9">Search Here!😊</h3>
+                <form class="form-horizontal" method="get" role="form">
+                  <div class="form-group">
+                    <div class="form-group">
+                        <label for="contain">Contains the word</label>
+                        {{ filter.form.title}}
+                      </div>
+                    <label for="filter">Medium</label>
+                    {{ filter.form.Vtype}}
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Student Gender</label>
+                    {{ filter.form.gender}}
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Class</label>
+                    {{ filter.form.sclass}}
+                  </div>
+                  <div class="form-group">
+                    <label for="contain">Tuition Status</label>
+                    {{ filter.form.status}}
+                  </div>
+                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
+                </form>
+            </div>
+        </div>
+       
+    </div>
+</div>
+</center>
+<br>
+<br>
+<br>
+<br>
+
+<!----------------------------------------------------------------------------------------------------->
+        <!-- Search Start 
         <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
             <div class="container">
                 <form method="get">
@@ -23,7 +74,7 @@
                 </form>
             </div>
         </div>
-        <!-- Search End -->
+    Search End -->
         
       
 
@@ -65,7 +116,7 @@
                                         <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
                                         <a class="btn btn-primary" href="/job/{{job.id}}">Apply Now</a>
                                     </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{job.date}}</small>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{job.date|naturaltime}}</small>
                                 </div>
                             </div>
                         </div>

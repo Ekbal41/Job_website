@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,8 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.humanize",
+    
     # Third-party apps
     "allauth",
     "allauth.account",
@@ -192,3 +195,6 @@ DEBUG_TOOLBAR_CONFIG = {
 CSRF_TRUSTED_ORIGINS=['http://http://127.0.0.1:8000/']
 
 FILTERS_EMPTY_CHOICE_LABEL = 'Nothing Selected'
+
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

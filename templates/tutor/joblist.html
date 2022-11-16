@@ -1,4 +1,6 @@
 {% extends '_base.html' %}
+{% load humanize %}
+
 
 {%load static%}
 
@@ -89,7 +91,7 @@
                                         <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
                                         <a class="btn btn-primary" href="/job/{{job.id}}">Apply Now</a>
                                     </div>
-                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{job.date}}</small>
+                                    <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{job.date|naturaltime}}</small>
                                 </div>
                             </div>
                         </div>
