@@ -1,9 +1,9 @@
-# Tem4Django4
-A djnago starter template. If you want to use it just clone it or download zip file of the code.
+
 
 # It uses <br>
         Bootstrap5
         Django4
+        Tem4Django4
 
 # I cloned your repo. whta's next?<br>
         $ pip install -r requirements.txt
@@ -13,3 +13,4 @@ A djnago starter template. If you want to use it just clone it or download zip f
       
 # How do i change the froject name?<br>
 $ python manage.py renameproject 'old-name' 'new-name'
+
