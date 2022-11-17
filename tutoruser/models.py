@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
+from django.dispatch import receiver 
+from django.db.models.signals import post_save 
 
 # Create your models here.
 # Extending User Model Using a One-To-One Link
@@ -25,6 +27,18 @@ class Profile(models.Model):
     twitter =models.CharField(null=True,max_length=70)
     linkedin =models.CharField(null=True,max_length=70)
     youtube =models.CharField(null=True,max_length=70)
+    
+    @receiver(post_save, sender=CustomUser) 
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+            
+    @receiver(post_save, sender=CustomUser)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+            
+
+	
 
     def __str__(self):
         return self.user.username

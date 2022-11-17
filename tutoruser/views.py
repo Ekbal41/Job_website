@@ -5,9 +5,11 @@ from .models import Profile
 from django.shortcuts import redirect
 
 
+
 @login_required
 def profile(request):
     profileform = ProfileForm()
+    data = Profile.objects.get(user_id = request.user.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST)
         if form.is_valid():
@@ -19,9 +21,12 @@ def profile(request):
             
     else:
         profileform = ProfileForm()
+        
+    if data:
+        pdata = data
     
     
-    return render(request, 'tutoruser/profileedit.html',{'profileform': profileform})
+    return render(request, 'tutoruser/profileedit.html',{'profileform': profileform, "data": pdata})
 
 
 @login_required

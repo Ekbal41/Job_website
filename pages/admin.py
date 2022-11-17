@@ -15,6 +15,6 @@ admin.site.register(Teacher, TeacherAdmin)
 
 
 class AplicationsAdmin(admin.ModelAdmin):
-    list_display = ( 'name', 'phone', 'university')
+    list_display = ( 'name', 'phone', 'university', 'tuition_page')
     
 admin.site.register(Aplications, AplicationsAdmin)

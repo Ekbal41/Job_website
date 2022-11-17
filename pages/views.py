@@ -93,8 +93,18 @@ def joblist(request):
 
 def job(request, pk):
     job = Job.objects.get(id =pk)
-    
-    return render(request,'tutor/job.html',{'job': job},)
+    user = request.user
+    ap = job.aplicants.all()
+    for us in ap:
+        if us == user:
+            applied = 'yes'
+        else:
+            applied = 'no'
+            
+    return render(request,'tutor/job.html',{'job': job, 'applied': applied},)
+
+
+
 
 def aplications(request, pk):
     if request.method=='POST':
@@ -116,9 +126,10 @@ def aplications(request, pk):
             pass
         else:
             
+            
             tfirstname = request.POST.get('firstname')
             tlastname = request.POST.get('lastname')
-            name = str(tfirstname)+str(tlastname)
+            name = str(tfirstname) +' '+ str(tlastname)
         
             tcov = request.POST.get('cover')
             tuniversity= request.POST.get('uni')
@@ -131,15 +142,26 @@ def aplications(request, pk):
         else:
             job.status ='Pending'
             job.save()
+            job = Job.objects.get(id =pk)
+            
             tfirstname = request.POST.get('firstname')
             tlastname = request.POST.get('lastname')
-            name = str(tfirstname)+str(tlastname)
+            name = str(tfirstname) + ' ' +str(tlastname)
         
             tcov = request.POST.get('cover')
             tuniversity= request.POST.get('uni')
             tphone = request.POST.get('phone')
-            aplication=Aplications(name=name,cv=tcov,university=tuniversity,phone=tphone)
-            aplication.save()      
+            jobname = job.title
+            id = pk
+            aplication=Aplications(name=name,cv=tcov,university=tuniversity,phone=tphone, appliedtuition=jobname, tuitionid = id)
+            aplication.save()
+            
+            user = request.user
+            job = Job.objects.get(id =pk)
+            job.aplicants.add(user)
+            job.save()
+                 
+             
     
     
         return redirect("/")

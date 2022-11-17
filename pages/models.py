@@ -1,6 +1,7 @@
 from django.db import models
 import django_filters
 from ckeditor.fields import RichTextField
+from accounts.models import CustomUser
 
 # Create your models here.
 
@@ -35,6 +36,7 @@ class Job(models.Model):
     ("Pending", "Pending"),
      ("Other", "Other"),
     )
+    aplicants = models.ManyToManyField(CustomUser,blank=True)
     title=models.CharField(max_length=50)
     category=models.CharField(max_length=50,choices = CAT)
     sclass=models.CharField(max_length=50)
@@ -77,8 +79,15 @@ class Aplications(models.Model):
     name=models.CharField(max_length=50)
     university=models.CharField(max_length=50)
     phone=models.CharField(max_length=50)
+    appliedtuition = models.CharField(max_length=100, null= True)
+    tuitionid = models.CharField(max_length=10, null=True)
     cv = RichTextField()
     
+    
+    def tuition_page(self):
+       
+        from django.utils.html import format_html
+        return format_html("<a href='/job/%s'>%s</a>" % (self.tuitionid, self.appliedtuition))
     
     
     def __str__(self):

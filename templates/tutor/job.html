@@ -57,7 +57,25 @@
                     <form method="POST", action="/aplications/{{job.id}}">
                         {% csrf_token %}
 
-                        {% if job.status == "Available" or job.status == "Pending"%}
+                        
+                        {% if applied == 'yes'%}
+
+                        <div class="row g-3">
+                            <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                                <h4 class="mb-4">Assalamuwalaikum😊</h4>
+                                <p>You have already applied to this job. Please wait while we review your CV. </p>
+                                <p>If you are eligible for this job we will phone you soon.</p>
+                                <p>Thanks for bing with us_</p>
+                               
+                                
+                                
+                            </div>
+                        </div>
+
+
+                       
+
+                        {% elif job.status == "Available" or job.status == "Pending" and applied == 'no'%}
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
                                 <input type="text" name="firstname" class="form-control" placeholder="First Name">
@@ -78,12 +96,14 @@
                             <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Apply Now</button>
                             </div>
-                            {%else%}
+
+                            {%elif job.status == 'NotAvailable'%}
+                      
                             <div class="row g-3">
                                 <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                                     <h4 class="mb-4">Assalamuwalaikum😊</h4>
                                     <p>You can't apply for this job as it's already taken by a responsible teacher.</p>
-                                    <p>But you can always let us now your details so that we can reach when there is a job for you.</p>
+                                    <p>But you can always let us now your details so that we can reach when there is similer job for you.</p>
                                     <p>Write about you in the form bellow_</p>
                                    
                                     
@@ -108,8 +128,21 @@
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100" type="submit">Submit Your Info</button>
                                 </div>
+
+                                {%else%}
+                                <div class="row g-3">
+                                    <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                                        <h4 class="mb-4">Ops...</h4>
+                                        
+                                        <p>Something went wrong!</p>
+                                       
+                                        
+                                        
+                                    </div>
+                                </div>
                                 {%endif%}
                         </div>
+                       
                     </form>
                 </div>
             </div>
@@ -139,4 +172,5 @@
     </div>
 </div>
 <!-- Job Detail End -->
+
 {%endblock content%}
