@@ -99,11 +99,12 @@ def job(request, pk):
     job = Job.objects.get(id =pk)
     user = request.user
     ap = job.aplicants.all()
+    applied = 'no'
     for us in ap:
         if us == user:
             applied = 'yes'
         else:
-            applied = 'no'
+            pass
             
     return render(request,'tutor/job.html',{'job': job, 'applied': applied},)
 
@@ -166,9 +167,9 @@ def aplications(request, pk):
             job.save()
                  
              
+        redirect_url =  "/job/" + str(pk)
     
-    
-        return redirect("/")
+        return redirect(redirect_url)
     
     
 def job_list(request):
