@@ -1,8 +1,11 @@
+from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect
 from .models import Job, Teacher_To_Focu, Aplication,JobFilter
 from tutoruser.models import Testimonial
+from accounts.models import CustomUser
 
 
 
@@ -175,7 +178,7 @@ def aplications(request, pk):
 def job_list(request):
     f = JobFilter(request.GET, queryset=Job.objects.all())
     return render(request, 'tutor/search.html', {'filter': f})
-    
+
     
 
 

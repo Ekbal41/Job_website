@@ -2,6 +2,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY
@@ -17,6 +19,7 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = [
+     'jazzmin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     "accounts",
     "pages",
     "ckeditor",
-    "tutoruser"
+    "tutoruser",
+
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -199,3 +203,46 @@ FILTERS_EMPTY_CHOICE_LABEL = 'Nothing Selected'
 
 MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+#----------------------------------Admin Panel ------------------------------------------------
+JAZZMIN_UI_TWEAKS = {
+
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+}
+JAZZMIN_SETTINGS = {
+
+
+  "site_title": "Tutorhome Admin",
+  "site_header": "TutorHome",
+    "site_brand": "TutorHome",
+    "welcome_sign": "Welcome to the TutorHome",
+    "copyright": "TutorHome",
+    "search_model": ["accounts.CustomUser", "pages.Aplication"],
+     "site_logo": "/male.png",
+
+
+
+    "related_modal_active": True,
+
+    "icons": {
+        "account": "fas fa-users-cog",
+        "accounts.CustomUser": "fas fa-users",
+
+
+        "auth.Group": "fas fa-users",
+        "pages.Aplication":"fas fa-envelope",
+       "pages.Job": "fas fa-briefcase",
+       "pages.Teacher_To_Focu": "fas fa-chalkboard-teacher",
+       "tutoruser.Profile": "fas fa-user-circle",
+        "tutoruser.Testimonial": "fas fa-quote-right",
+       "sites.Site": "fas fa-file-word",
+
+
+
+
+
+    },
+
+    }
