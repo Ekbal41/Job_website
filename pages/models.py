@@ -60,7 +60,7 @@ class Job(models.Model):
         return self.title
 
 
-class Teacher(models.Model):
+class Teacher_To_Focu(models.Model):
     name=models.CharField(max_length=50,null=True)
     university=models.CharField(max_length=50,null=True)
     phone=models.CharField(max_length=50,null=True)
@@ -74,7 +74,7 @@ class Teacher(models.Model):
      return self.name
     
     
-class Aplications(models.Model):
+class Aplication(models.Model):
         
     name=models.CharField(max_length=50)
     university=models.CharField(max_length=50)

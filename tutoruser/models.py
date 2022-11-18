@@ -19,7 +19,7 @@ class Profile(models.Model):
     email = models.CharField(null=True,max_length=70)
     religion= models.CharField(null=True,max_length=70)
     ongoingtuition =models.CharField(null=True,max_length=70)
-    experience =models.TextField(null=True,max_length=70)
+    experience =models.TextField(null=True,max_length=500)
     university = models.CharField(null=True,max_length=40)
     depertment = models.CharField(null=True,max_length=40)
     
@@ -27,6 +27,8 @@ class Profile(models.Model):
     twitter =models.CharField(null=True,max_length=70)
     linkedin =models.CharField(null=True,max_length=70)
     youtube =models.CharField(null=True,max_length=70)
+
+
     
     @receiver(post_save, sender=CustomUser) 
     def create_user_profile(sender, instance, created, **kwargs):
@@ -42,3 +44,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Testimonial(models.Model):
+
+    avatar = models.ImageField(null=True, blank=True, upload_to='testimonial_profile_images')
+    name = models.CharField(null=True,max_length=20)
+    testimonial = models.TextField(null=True,max_length=400)
+    prof = models.CharField(null=True, max_length=400)
+    date = models.DateTimeField(auto_now=True)

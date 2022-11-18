@@ -1,14 +1,18 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect
-from .models import Job, Teacher, Aplications,JobFilter
+from .models import Job, Teacher_To_Focu, Aplication,JobFilter
+from tutoruser.models import Testimonial
 
 
 
 def index(request):
     jobs = Job.objects.order_by('-date')[:6]
+    testimonial =Testimonial.objects.order_by('-date')
+
+
     
-    return render(request,'tutor/index.html',{'jobs': jobs})
+    return render(request,'tutor/index.html',{'jobs': jobs, 'test':testimonial })
 
 def category(request, cat):
     
@@ -120,7 +124,7 @@ def aplications(request, pk):
         
         
         tphone = request.POST.get('phone')
-        oldteacher = Teacher.objects.filter(phone=tphone).exists()
+        oldteacher = Teacher_To_Focu.objects.filter(phone=tphone).exists()
         
         if oldteacher:
             pass
@@ -134,7 +138,7 @@ def aplications(request, pk):
             tcov = request.POST.get('cover')
             tuniversity= request.POST.get('uni')
             tphone = request.POST.get('phone')
-            teacher=Teacher(name=name,cv=tcov,university=tuniversity,phone=tphone)
+            teacher=Teacher_To_Focu(name=name,cv=tcov,university=tuniversity,phone=tphone)
             teacher.save()
         
         if job.status == "NotAvailable":
@@ -153,7 +157,7 @@ def aplications(request, pk):
             tphone = request.POST.get('phone')
             jobname = job.title
             id = pk
-            aplication=Aplications(name=name,cv=tcov,university=tuniversity,phone=tphone, appliedtuition=jobname, tuitionid = id)
+            aplication=Aplication(name=name,cv=tcov,university=tuniversity,phone=tphone, appliedtuition=jobname, tuitionid = id)
             aplication.save()
             
             user = request.user
